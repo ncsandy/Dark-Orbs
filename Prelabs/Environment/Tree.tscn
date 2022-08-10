@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://tiles/tree.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 15, 27 )
+
+[node name="Tree" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 133, 121.663 )
+scale = Vector2( 2, 1.9186 )
+texture = ExtResource( 1 )
+offset = Vector2( 1, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 139, 184 )
+shape = SubResource( 2 )
