@@ -15,7 +15,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][https://www.linkedin.com/in/nicholas-sandy/]
+[![LinkedIn][linkedin-shield][https://www.linkedin.com/in/nicholas-sandy/]
 
 
 
