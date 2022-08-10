@@ -209,6 +209,12 @@ shape = SubResource( 4 )
 
 [node name="Orb" parent="." instance=ExtResource( 9 )]
 
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+
 [connection signal="body_entered" from="House/PlayerDector" to="House" method="_on_PlayerDector_body_entered"]
 [connection signal="body_exited" from="House/PlayerDector" to="House" method="_on_PlayerDector_body_exited"]
 [connection signal="body_entered" from="House/Door" to="House" method="_on_Door_body_entered"]
