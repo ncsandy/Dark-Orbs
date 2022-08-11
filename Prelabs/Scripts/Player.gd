@@ -11,6 +11,11 @@ onready var anim_tree = $AnimationTree
 onready var anim_state = anim_tree.get("parameters/playback")
 onready var attack_state = $Attack
 onready var walk_state = $Walk
+onready var spell = $Spell
+var spell_vector = Vector2.ZERO
+
+func _ready():
+	spell.knockback_vector = spell_vector
 
 var speed = 200
 var velocity = Vector2.ZERO
@@ -31,6 +36,7 @@ func Move_state():
 	input_movement.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	
 	if input_movement != Vector2.ZERO:
+		spell.knockback_vector = input_movement
 		anim_tree.set("parameters/Walk/blend_position", input_movement)
 		anim_tree.set("parameters/Idle/blend_position", input_movement)
 		anim_tree.set("parameters/Attack/blend_position", input_movement)
