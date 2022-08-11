@@ -26,4 +26,3 @@ func update_name(name):
 	
 func death_text(orb):
 	labelName.text = str("+", orb, " orbs")
-		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://sprites/monsters/bat.png" type="Texture" id=1]
 [ext_resource path="res://Prelabs/Scripts/Bat.gd" type="Script" id=2]
@@ -154,6 +154,9 @@ tracks/1/keys = {
 radius = 7.0
 height = 0.0
 
+[sub_resource type="CircleShape2D" id=12]
+radius = 19.0
+
 [node name="Bat" type="KinematicBody2D"]
 position = Vector2( 595, 135 )
 collision_layer = 4
@@ -190,5 +193,12 @@ shape = SubResource( 6 )
 [node name="HealthDisplay" parent="." instance=ExtResource( 3 )]
 position = Vector2( -17, -14 )
 scale = Vector2( 0.2, 0.2 )
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" groups=["Enemy"]]
+position = Vector2( 2, 6 )
+shape = SubResource( 12 )
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]

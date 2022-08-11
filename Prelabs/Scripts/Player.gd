@@ -58,3 +58,8 @@ func Attack_state():
 func Attack_finished():
 	walk_state.show()
 	state = MOVE
+	
+func _on_Hitbox_area_entered(area):
+	if area.is_in_group("Enemy"):
+		Globals.player_health -= 10
+		print("Player health is now: ",Globals.player_health)
