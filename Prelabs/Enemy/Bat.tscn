@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://sprites/monsters/bat.png" type="Texture" id=1]
 [ext_resource path="res://Prelabs/Scripts/Bat.gd" type="Script" id=2]
@@ -151,11 +151,14 @@ tracks/1/keys = {
 }
 
 [sub_resource type="CapsuleShape2D" id=6]
-radius = 7.0
+radius = 11.0
 height = 0.0
 
 [sub_resource type="CircleShape2D" id=12]
-radius = 19.0
+radius = 10.0499
+
+[sub_resource type="CircleShape2D" id=13]
+radius = 143.0
 
 [node name="Bat" type="KinematicBody2D"]
 position = Vector2( 595, 135 )
@@ -170,8 +173,12 @@ hframes = 3
 vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2, 10 )
+position = Vector2( 2, 7 )
 shape = SubResource( 5 )
+
+[node name="HealthDisplay" parent="." instance=ExtResource( 3 )]
+position = Vector2( -17, -14 )
+scale = Vector2( 0.2, 0.2 )
 
 [node name="batAnim" type="AnimationPlayer" parent="."]
 autoplay = "FlyLeft"
@@ -190,15 +197,20 @@ collision_mask = 16
 position = Vector2( 2, 18 )
 shape = SubResource( 6 )
 
-[node name="HealthDisplay" parent="." instance=ExtResource( 3 )]
-position = Vector2( -17, -14 )
-scale = Vector2( 0.2, 0.2 )
+[node name="Hurtbox" type="Area2D" parent="." groups=["Enemy"]]
+collision_layer = 8
 
-[node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" groups=["Enemy"]]
-position = Vector2( 2, 6 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2( 2, 11 )
 shape = SubResource( 12 )
 
+[node name="AggroRing" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRing"]
+position = Vector2( 2, 7 )
+shape = SubResource( 13 )
+
 [connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]
+[connection signal="body_entered" from="AggroRing" to="." method="_on_AggroRing_body_entered"]
+[connection signal="body_exited" from="AggroRing" to="." method="_on_AggroRing_body_exited"]

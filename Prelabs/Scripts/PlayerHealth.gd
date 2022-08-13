@@ -24,5 +24,3 @@ func update_healthbar(value):
 func update_name(name):
 	labelName.text = str(name)
 	
-func death_text(orb):
-	labelName.text = str("+", orb, " orbs")

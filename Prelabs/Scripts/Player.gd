@@ -11,16 +11,16 @@ onready var anim_tree = $AnimationTree
 onready var anim_state = anim_tree.get("parameters/playback")
 onready var attack_state = $Attack
 onready var walk_state = $Walk
-onready var spell = $Spell
+onready var spell_hitbox = $Spell
 var spell_vector = Vector2.ZERO
 
 func _ready():
-	spell.knockback_vector = spell_vector
+	spell_hitbox.knockback_vector = spell_vector
 
 var speed = 200
 var velocity = Vector2.ZERO
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	match state:
 		MOVE:
 			attack_state.hide()
@@ -36,13 +36,13 @@ func Move_state():
 	input_movement.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	
 	if input_movement != Vector2.ZERO:
-		spell.knockback_vector = input_movement
+		spell_hitbox.knockback_vector = input_movement
 		anim_tree.set("parameters/Walk/blend_position", input_movement)
 		anim_tree.set("parameters/Idle/blend_position", input_movement)
 		anim_tree.set("parameters/Attack/blend_position", input_movement)
 		anim_state.travel("Walk")
 		velocity += input_movement * speed
-		velocity = velocity.clamped(speed)
+		velocity = velocity.limit_length(speed)
 	else:
 		anim_state.travel("Idle")
 		velocity = Vector2.ZERO
@@ -62,4 +62,8 @@ func Attack_finished():
 func _on_Hitbox_area_entered(area):
 	if area.is_in_group("Enemy"):
 		Globals.player_health -= 10
-		print("Player health is now: ",Globals.player_health)
+		if Globals.player_health <= 0:
+			Globals.orbs = 0
+			get_tree().reload_current_scene()
+			Globals.player_health = Globals.player_max_health
+
