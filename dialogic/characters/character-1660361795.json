@@ -1,0 +1,21 @@
+{
+	"color": "#ff44e810",
+	"description": "Very quiet man....doesn't have much to say",
+	"display_name": "Moko",
+	"display_name_bool": true,
+	"id": "character-1660361795.json",
+	"mirror_portraits": false,
+	"name": "Moko",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": 0,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": ""
+		}
+	],
+	"scale": 100,
+	"theme": ""
+}
